@@ -1,0 +1,12 @@
+com\weatherApp\util\ConfigUtil.class
+com\weatherApp\controller\WeatherController.class
+com\weatherApp\model\Main.class
+com\weatherApp\model\ForecastWeatherDto.class
+com\weatherApp\WeatherApp.class
+com\weatherApp\service\ForecastService.class
+com\weatherApp\service\WeatherService.class
+com\weatherApp\model\ForecastResponseDto.class
+com\weatherApp\model\WeatherResponse.class
+com\weatherApp\model\Weather.class
+com\weatherApp\model\WeatherResponseDto.class
+com\weatherApp\util\HttpClientUtil.class
