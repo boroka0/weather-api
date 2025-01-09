@@ -10,6 +10,7 @@ import com.weatherApp.util.HttpClientUtil;
 import java.io.IOException;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,15 +47,24 @@ public class ForecastService {
                     .atZone(ZoneId.systemDefault())
                     .toLocalDate();
 
+            LocalTime sunrise = Instant.ofEpochSecond(forecastDto.getCity().getSunrise())
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalTime();
+
+            LocalTime sunset = Instant.ofEpochSecond(forecastDto.getCity().getSunset())
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalTime();
+
             WeatherResponse weatherResponse = new WeatherResponse(
                     city,
                     day.getMain().getTemp(),
                     day.getMain().getHumidity(),
                     day.getMain().getPressure(),
                     day.getWeather().get(0).getDescription(),
-                    date
+                    date,
+                    sunrise,
+                    sunset
             );
-
             forecast.add(weatherResponse);
         }
         return forecast;

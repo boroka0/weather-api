@@ -31,6 +31,8 @@ public class WeatherController {
         System.out.println("Humidity: " + response.getHumidity() + "%");
         System.out.println("Pressure: " + response.getPressure() + " hPa");
         System.out.println("Description: " + response.getWeatherDescription());
+        System.out.println("Sunrise: " + response.getSunrise());
+        System.out.println("Sunset: " + response.getSunset());
     }
 
     private void handleError(Exception e) {

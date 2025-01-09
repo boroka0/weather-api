@@ -11,4 +11,5 @@ import java.util.List;
 @AllArgsConstructor
 public class ForecastResponseDto {
     private List<ForecastWeatherDto> list;
+    private CityDto city;
 }

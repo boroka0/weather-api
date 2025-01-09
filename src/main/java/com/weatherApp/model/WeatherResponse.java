@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Data
 @AllArgsConstructor
@@ -19,4 +20,6 @@ public class WeatherResponse {
     private double pressure;
     private String weatherDescription;
     private LocalDate date;
+    private LocalTime sunrise;
+    private LocalTime sunset;
 }

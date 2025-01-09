@@ -6,7 +6,10 @@ import com.weatherApp.model.WeatherResponseDto;
 import com.weatherApp.util.ConfigUtil;
 import com.weatherApp.util.HttpClientUtil;
 
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneId;
 
 public class WeatherService {
 
@@ -22,13 +25,23 @@ public class WeatherService {
             throw new IllegalStateException("Invalid response from weather API.");
         }
 
+        LocalTime sunrise = Instant.ofEpochSecond(weather.getSunrise())
+                .atZone(ZoneId.systemDefault())
+                .toLocalTime();
+
+        LocalTime sunset = Instant.ofEpochSecond(weather.getSunset())
+                .atZone(ZoneId.systemDefault())
+                .toLocalTime();
+
         return new WeatherResponse(
                 weather.getName(),
                 weather.getMain().getTemp(),
                 weather.getMain().getHumidity(),
                 weather.getMain().getPressure(),
                 weather.getWeather().get(0).getDescription(),
-                LocalDate.now()
+                LocalDate.now(),
+                sunrise,
+                sunset
         );
     }
 }
