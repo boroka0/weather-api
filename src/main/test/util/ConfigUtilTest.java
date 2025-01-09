@@ -1,4 +1,4 @@
-package util;
+package main.test.util;
 
 import com.weatherApp.util.ConfigUtil;
 import org.junit.Test;

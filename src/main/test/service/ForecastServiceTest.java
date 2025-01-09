@@ -1,7 +1,7 @@
-package com.weatherApp.service;
+package main.test.service;
 
 import com.weatherApp.model.WeatherResponse;
-import junit.framework.TestCase;
+import com.weatherApp.service.ForecastService;
 import org.junit.Test;
 
 import java.util.List;

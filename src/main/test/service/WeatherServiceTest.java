@@ -1,4 +1,4 @@
-package com.weatherApp.service;
+package main.test.service;
 
 import com.weatherApp.model.WeatherResponse;
 import com.weatherApp.service.WeatherService;
