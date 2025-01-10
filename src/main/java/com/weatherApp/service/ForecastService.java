@@ -25,8 +25,6 @@ public class ForecastService {
                 city,
                 ConfigUtil.get("api.key"));
 
-        System.out.println("Forecast API URL: " + url);
-
         try {
             responseJson = HttpClientUtil.get(url);
         } catch (IOException e) {

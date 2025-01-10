@@ -1,7 +1,11 @@
 package com.weatherApp.controller;
 
+import com.weatherApp.model.AirQualityResponse;
+import com.weatherApp.model.Location;
 import com.weatherApp.model.WeatherResponse;
+import com.weatherApp.service.AirQualityService;
 import com.weatherApp.service.ForecastService;
+import com.weatherApp.service.GeocodingService;
 import com.weatherApp.service.WeatherService;
 
 import java.util.List;
@@ -10,16 +14,30 @@ public class WeatherController {
 
     private final WeatherService weatherService;
     private final ForecastService forecastService;
+    private final AirQualityService airQualityService;
+    private final GeocodingService geocodingService;
 
     public WeatherController() {
         this.weatherService = new WeatherService();
         this.forecastService = new ForecastService();
+        this.airQualityService = new AirQualityService();
+        this.geocodingService = new GeocodingService();
     }
 
     public void getWeather(String city) {
         try {
             WeatherResponse response = weatherService.getWeather(city);
             displayWeather(response);
+        } catch (Exception e) {
+            handleError(e);
+        }
+    }
+
+    public void getAirQuality(String cityName) {
+        try {
+            Location location = geocodingService.getCoordinates(cityName);
+            AirQualityResponse response = airQualityService.getAirQuality(location.getLat(), location.getLon());
+            displayAirQuality(response);
         } catch (Exception e) {
             handleError(e);
         }
@@ -35,8 +53,15 @@ public class WeatherController {
         System.out.println("Sunset: " + response.getSunset());
     }
 
+    private void displayAirQuality(AirQualityResponse response) {
+        System.out.println("Air Quality at (" + response.getLocation().getLatitude() + ", " + response.getLocation().getLongitude() + "):");
+        System.out.println("AQI Level: " + response.getAirQuality().getAqi());
+        System.out.println("Components: " + response.getAirQuality().getComponents());
+        System.out.println("Health Advice: " + response.getAirQuality().getAdvice());
+    }
+
     private void handleError(Exception e) {
-        System.err.println("Error fetching weather data: " + e.getMessage());
+        System.err.println("Error fetching data: " + e.getMessage());
         if (e.getCause() != null) {
             System.err.println("Cause: " + e.getCause().getMessage());
         }
