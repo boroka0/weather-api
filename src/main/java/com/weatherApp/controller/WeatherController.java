@@ -2,12 +2,15 @@ package com.weatherApp.controller;
 
 import com.weatherApp.model.AirQualityResponse;
 import com.weatherApp.model.Location;
+import com.weatherApp.model.WeatherAlert;
 import com.weatherApp.model.WeatherResponse;
 import com.weatherApp.service.AirQualityService;
 import com.weatherApp.service.ForecastService;
 import com.weatherApp.service.GeocodingService;
 import com.weatherApp.service.WeatherService;
 
+import java.time.Instant;
+import java.time.ZoneId;
 import java.util.List;
 
 public class WeatherController {
@@ -49,8 +52,6 @@ public class WeatherController {
         System.out.println("Humidity: " + response.getHumidity() + "%");
         System.out.println("Pressure: " + response.getPressure() + " hPa");
         System.out.println("Description: " + response.getWeatherDescription());
-        System.out.println("Sunrise: " + response.getSunrise());
-        System.out.println("Sunset: " + response.getSunset());
     }
 
     private void displayAirQuality(AirQualityResponse response) {
@@ -84,6 +85,29 @@ public class WeatherController {
             System.out.println("Humidity: " + response.getHumidity() + "%");
             System.out.println("Pressure: " + response.getPressure() + " hPa");
             System.out.println("Description: " + response.getWeatherDescription());
+            System.out.println("-----------");
+        }
+    }
+
+    public void getWeatherAlerts(String city) {
+        try {
+            Location location = geocodingService.getCoordinates(city);
+            List<WeatherAlert> alerts = weatherService.getWeatherAlerts(location.getLat(), location.getLon());
+            displayWeatherAlerts(alerts);
+        } catch (Exception e) {
+            handleError(e);
+        }
+    }
+
+    private void displayWeatherAlerts(List<WeatherAlert> alerts) {
+        if (alerts.isEmpty()) {
+            System.out.println("No severe weather alerts for this location.");
+            return;
+        }
+
+        System.out.println("Severe Weather Alerts:");
+        for (WeatherAlert alert : alerts) {
+            System.out.println("Event: " + alert.getEvent());
             System.out.println("-----------");
         }
     }

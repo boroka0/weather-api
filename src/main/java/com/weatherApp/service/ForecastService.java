@@ -45,23 +45,13 @@ public class ForecastService {
                     .atZone(ZoneId.systemDefault())
                     .toLocalDate();
 
-            LocalTime sunrise = Instant.ofEpochSecond(forecastDto.getCity().getSunrise())
-                    .atZone(ZoneId.systemDefault())
-                    .toLocalTime();
-
-            LocalTime sunset = Instant.ofEpochSecond(forecastDto.getCity().getSunset())
-                    .atZone(ZoneId.systemDefault())
-                    .toLocalTime();
-
             WeatherResponse weatherResponse = new WeatherResponse(
                     city,
                     day.getMain().getTemp(),
                     day.getMain().getHumidity(),
                     day.getMain().getPressure(),
                     day.getWeather().get(0).getDescription(),
-                    date,
-                    sunrise,
-                    sunset
+                    date
             );
             forecast.add(weatherResponse);
         }

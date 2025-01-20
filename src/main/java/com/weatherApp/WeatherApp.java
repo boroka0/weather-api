@@ -14,7 +14,7 @@ public class WeatherApp {
 
         try {
             System.out.println("Options:");
-            System.out.println("1. Get Weather");
+            System.out.println("1. Get Weather (with weather alerts)");
             System.out.println("2. Get Forecast");
             System.out.println("3. Get Air Quality");
             System.out.print("Choose an option by entering a number: ");
@@ -25,6 +25,7 @@ public class WeatherApp {
                 System.out.print("Enter the city name: ");
                 String city = scanner.nextLine();
                 weatherController.getWeather(city);
+                weatherController.getWeatherAlerts(city);
             } else if (option == 2) {
                 System.out.print("Enter the city name: ");
                 String city = scanner.nextLine();

@@ -25,5 +25,4 @@ public class HttpClientUtil {
             throw new IOException("Unexpected HTTP error: " + responseCode);
         }
     }
-
 }

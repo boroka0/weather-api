@@ -7,8 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Sys {
-    private long sunrise;
-    private long sunset;
+public class WeatherAlertDto {
+    private String event;
+    private long startEpoch;
+    private long endEpoch;
+    private String description;
 }
-

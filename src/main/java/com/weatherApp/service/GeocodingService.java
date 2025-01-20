@@ -11,31 +11,35 @@ import java.io.IOException;
 
 public class GeocodingService {
     public Location getCoordinates(String cityName) {
-        String url = String.format("%s/geo/1.0/direct?q=%s&limit=1&appid=%s",
-                ConfigUtil.get("api.base.url"),
-                cityName,
-                ConfigUtil.get("api.key"));
+        String apiKey = ConfigUtil.get("locationiq.api.key");
+        String baseUrl = ConfigUtil.get("locationiq.api.url");
+
+        String url = String.format("%s?key=%s&q=%s&format=json",
+                baseUrl,
+                apiKey,
+                cityName.replace(" ", "+"));
 
         String responseJson;
 
         try {
             responseJson = HttpClientUtil.get(url);
         } catch (IOException e) {
-            throw new RuntimeException("Failed to fetch geocoding data.", e);
+            e.printStackTrace();
+            throw new RuntimeException("Failed to fetch geocoding data: Unable to connect to the API.", e);
         }
 
         GeocodingResponse[] geocodingResponses;
         try {
             geocodingResponses = new Gson().fromJson(responseJson, GeocodingResponse[].class);
         } catch (JsonSyntaxException e) {
-            throw new IllegalStateException("Failed to parse geocoding response JSON.", e);
+            throw new IllegalStateException("Failed to parse geocoding response JSON. Raw response: " + responseJson, e);
         }
 
         if (geocodingResponses == null || geocodingResponses.length == 0) {
-            throw new IllegalStateException("No geocoding results found for the city: " + cityName);
+            throw new IllegalStateException("City not found: " + cityName + ". Please check the city name.");
         }
 
         GeocodingResponse firstResult = geocodingResponses[0];
-        return new Location(firstResult.getLat(), firstResult.getLon());
+        return new Location(Double.parseDouble(firstResult.getLat()), Double.parseDouble(firstResult.getLon()));
     }
 }

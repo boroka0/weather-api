@@ -1,6 +1,8 @@
 package com.weatherApp.service;
 
 import com.google.gson.Gson;
+import com.weatherApp.model.WeatherAlert;
+import com.weatherApp.model.WeatherAlertResponseDto;
 import com.weatherApp.model.WeatherResponse;
 import com.weatherApp.model.WeatherResponseDto;
 import com.weatherApp.util.ConfigUtil;
@@ -10,6 +12,9 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class WeatherService {
 
@@ -39,9 +44,31 @@ public class WeatherService {
                 weather.getMain().getHumidity(),
                 weather.getMain().getPressure(),
                 weather.getWeather().get(0).getDescription(),
-                LocalDate.now(),
-                sunrise,
-                sunset
+                LocalDate.now()
         );
+    }
+
+    public List<WeatherAlert> getWeatherAlerts(double lat, double lon) throws Exception {
+        String url = String.format("%s/alerts.json?key=%s&q=%f,%f",
+                ConfigUtil.get("weather.api.url"),
+                ConfigUtil.get("weather.api.key"),
+                lat,
+                lon);
+
+        String responseJson = HttpClientUtil.get(url);
+
+        WeatherAlertResponseDto response = new Gson().fromJson(responseJson, WeatherAlertResponseDto.class);
+
+        if (response == null || response.getAlerts().getAlert() == null || response.getAlerts().getAlert().isEmpty()) {
+            return Collections.emptyList();
+        }
+
+        return response.getAlerts().getAlert().stream()
+                .map(alertDto -> new WeatherAlert(
+                        alertDto.getEvent(),
+                        alertDto.getStartEpoch(),
+                        alertDto.getEndEpoch(),
+                        alertDto.getDescription()))
+                .collect(Collectors.toList());
     }
 }

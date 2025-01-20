@@ -20,6 +20,4 @@ public class WeatherResponse {
     private double pressure;
     private String weatherDescription;
     private LocalDate date;
-    private LocalTime sunrise;
-    private LocalTime sunset;
 }

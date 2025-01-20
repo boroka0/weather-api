@@ -8,8 +8,6 @@ import org.junit.Test;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 
-import java.time.LocalTime;
-
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mockStatic;
@@ -24,7 +22,6 @@ public class WeatherServiceTest {
         assertEquals("Paris", response.getCityName());
         assertTrue(response.getTemperature() > -100 && response.getTemperature() < 50);
         assertTrue(response.getHumidity() >= 0 && response.getHumidity() <= 100);
-        assertNotSame(response.getSunrise(), LocalTime.MIDNIGHT);
     }
 
     @Test

@@ -8,9 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class GeocodingResponse {
-    private String name;
-    private double lat;
-    private double lon;
-    private String country;
-    private String state;
+    private String lat;
+    private String lon;
 }
