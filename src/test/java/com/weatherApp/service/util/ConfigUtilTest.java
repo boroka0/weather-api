@@ -1,10 +1,10 @@
-package main.test.util;
+package com.weatherApp.service.util;
 
 import com.weatherApp.util.ConfigUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mockStatic;
 
 public class ConfigUtilTest {

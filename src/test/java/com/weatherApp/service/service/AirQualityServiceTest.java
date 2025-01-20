@@ -1,17 +1,16 @@
-package main.test.service;
+package com.weatherApp.service.service;
 
 import com.weatherApp.model.AirQualityResponse;
 import com.weatherApp.service.AirQualityService;
 import com.weatherApp.util.ConfigUtil;
 import com.weatherApp.util.HttpClientUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mockStatic;
+
 
 public class AirQualityServiceTest {
 

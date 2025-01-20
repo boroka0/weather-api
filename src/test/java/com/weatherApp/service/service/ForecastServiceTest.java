@@ -1,18 +1,18 @@
-package main.test.service;
+package com.weatherApp.service.service;
 
 import com.weatherApp.model.WeatherResponse;
 import com.weatherApp.service.ForecastService;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ForecastServiceTest {
 
     @Test
-    public void testGetWeatherWithApi() throws Exception {
+    public void testGetWeatherWithApi() {
         ForecastService service = new ForecastService();
         List<WeatherResponse> response = service.getForecast("Paris");
 

@@ -1,15 +1,14 @@
-package main.test.service;
+package com.weatherApp.service.service;
 
 import com.weatherApp.model.WeatherResponse;
 import com.weatherApp.service.WeatherService;
 import com.weatherApp.util.ConfigUtil;
 import com.weatherApp.util.HttpClientUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 
-import static org.junit.Assert.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mockStatic;
 
 public class WeatherServiceTest {
