@@ -1,9 +1,11 @@
+C:\Users\local\IdeaProjects\WeatherApp\src\main\java\com\weatherApp\service\UserPreferencesService.java
 C:\Users\local\IdeaProjects\WeatherApp\src\main\java\com\weatherApp\model\AirQualityMain.java
 C:\Users\local\IdeaProjects\WeatherApp\src\main\java\com\weatherApp\util\ConfigUtil.java
 C:\Users\local\IdeaProjects\WeatherApp\src\main\java\com\weatherApp\model\AirQualityComponents.java
 C:\Users\local\IdeaProjects\WeatherApp\src\main\java\com\weatherApp\model\Main.java
 C:\Users\local\IdeaProjects\WeatherApp\src\main\java\com\weatherApp\model\CityDto.java
 C:\Users\local\IdeaProjects\WeatherApp\src\main\java\com\weatherApp\service\AirQualityService.java
+C:\Users\local\IdeaProjects\WeatherApp\src\main\java\com\weatherApp\util\DatabaseUtil.java
 C:\Users\local\IdeaProjects\WeatherApp\src\main\java\com\weatherApp\model\WeatherAlertResponseDto.java
 C:\Users\local\IdeaProjects\WeatherApp\src\main\java\com\weatherApp\service\GeocodingService.java
 C:\Users\local\IdeaProjects\WeatherApp\src\main\java\com\weatherApp\model\AirQualityResponse.java
@@ -12,6 +14,7 @@ C:\Users\local\IdeaProjects\WeatherApp\src\main\java\com\weatherApp\model\AirQua
 C:\Users\local\IdeaProjects\WeatherApp\src\main\java\com\weatherApp\model\Weather.java
 C:\Users\local\IdeaProjects\WeatherApp\src\main\java\com\weatherApp\model\WeatherResponseDto.java
 C:\Users\local\IdeaProjects\WeatherApp\src\main\java\com\weatherApp\model\WeatherAlert.java
+C:\Users\local\IdeaProjects\WeatherApp\src\main\java\com\weatherApp\repository\UserPreferencesRepository.java
 C:\Users\local\IdeaProjects\WeatherApp\src\main\java\com\weatherApp\model\ForecastResponseDto.java
 C:\Users\local\IdeaProjects\WeatherApp\src\main\java\com\weatherApp\service\WeatherService.java
 C:\Users\local\IdeaProjects\WeatherApp\src\main\java\com\weatherApp\model\WeatherAlertDto.java

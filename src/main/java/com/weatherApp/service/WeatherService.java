@@ -8,10 +8,9 @@ import com.weatherApp.model.WeatherResponseDto;
 import com.weatherApp.util.ConfigUtil;
 import com.weatherApp.util.HttpClientUtil;
 
-import java.time.Instant;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.ZoneId;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,8 +18,10 @@ import java.util.stream.Collectors;
 public class WeatherService {
 
     public WeatherResponse getWeather(String city) throws Exception {
+        String encodedCity = URLEncoder.encode(city, StandardCharsets.UTF_8);
+
         String url = String.format("%s?q=%s&units=metric&appid=%s",
-                ConfigUtil.get("api.base.url") + "/weather", city, ConfigUtil.get("api.key"));
+                ConfigUtil.get("api.base.url") + "/weather", encodedCity, ConfigUtil.get("api.key"));
 
         String responseJson = HttpClientUtil.get(url);
 
@@ -29,14 +30,6 @@ public class WeatherService {
         if (weather == null || weather.getName() == null) {
             throw new IllegalStateException("Invalid response from weather API.");
         }
-
-        LocalTime sunrise = Instant.ofEpochSecond(weather.getSunrise())
-                .atZone(ZoneId.systemDefault())
-                .toLocalTime();
-
-        LocalTime sunset = Instant.ofEpochSecond(weather.getSunset())
-                .atZone(ZoneId.systemDefault())
-                .toLocalTime();
 
         return new WeatherResponse(
                 weather.getName(),

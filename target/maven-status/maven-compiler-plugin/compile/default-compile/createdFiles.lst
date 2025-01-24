@@ -1,4 +1,5 @@
 com\weatherApp\model\WeatherAlertResponseDto$AlertWrapper.class
+com\weatherApp\repository\UserPreferencesRepository.class
 com\weatherApp\controller\WeatherController.class
 com\weatherApp\service\AirQualityService.class
 com\weatherApp\model\CityDto.class
@@ -14,6 +15,7 @@ com\weatherApp\model\ForecastResponseDto.class
 com\weatherApp\model\WeatherResponse.class
 com\weatherApp\model\Location.class
 com\weatherApp\model\Weather.class
+com\weatherApp\service\UserPreferencesService.class
 com\weatherApp\model\WeatherResponseDto.class
 com\weatherApp\util\HttpClientUtil.class
 com\weatherApp\model\AirQualityComponents.class
@@ -24,5 +26,6 @@ com\weatherApp\model\Main.class
 com\weatherApp\WeatherApp.class
 com\weatherApp\model\AirQualityResponse$AirQuality.class
 com\weatherApp\service\WeatherService.class
+com\weatherApp\util\DatabaseUtil.class
 com\weatherApp\model\AirQualityResponseDto.class
 com\weatherApp\model\WeatherAlertDto.class

@@ -4,13 +4,8 @@ import com.weatherApp.model.AirQualityResponse;
 import com.weatherApp.model.Location;
 import com.weatherApp.model.WeatherAlert;
 import com.weatherApp.model.WeatherResponse;
-import com.weatherApp.service.AirQualityService;
-import com.weatherApp.service.ForecastService;
-import com.weatherApp.service.GeocodingService;
-import com.weatherApp.service.WeatherService;
+import com.weatherApp.service.*;
 
-import java.time.Instant;
-import java.time.ZoneId;
 import java.util.List;
 
 public class WeatherController {
@@ -20,11 +15,15 @@ public class WeatherController {
     private final AirQualityService airQualityService;
     private final GeocodingService geocodingService;
 
+    private final UserPreferencesService userPreferencesService;
+
+
     public WeatherController() {
         this.weatherService = new WeatherService();
         this.forecastService = new ForecastService();
         this.airQualityService = new AirQualityService();
         this.geocodingService = new GeocodingService();
+        this.userPreferencesService = new UserPreferencesService();
     }
 
     public void getWeather(String city) {
@@ -109,6 +108,25 @@ public class WeatherController {
         for (WeatherAlert alert : alerts) {
             System.out.println("Event: " + alert.getEvent());
             System.out.println("-----------");
+        }
+    }
+
+    public void setDefaultCityForUser(int userId, String city) {
+        try {
+            userPreferencesService.setDefaultCity(userId, city);
+            System.out.println("Default city set to " + city + " for user ID: " + userId);
+        } catch (Exception e) {
+            handleError(e);
+        }
+    }
+
+    public void getWeatherForUser(int userId) {
+        try {
+            String defaultCity = userPreferencesService.getDefaultCity(userId);
+            System.out.println("User ID: " + userId + ", Default City: " + defaultCity);
+            getWeather(defaultCity);
+        } catch (Exception e) {
+            handleError(e);
         }
     }
 }
