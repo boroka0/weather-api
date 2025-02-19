@@ -1,21 +1,16 @@
 package com.weatherApp;
 
 import com.weatherApp.controller.WeatherController;
-import com.weatherApp.util.DatabaseUtil;
 
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.Scanner;
 
 public class WeatherApp {
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        WeatherController weatherController = new WeatherController();
 
-        System.out.println("Welcome to the Weather App!");
-
-        try {
+        try (Scanner scanner = new Scanner(System.in)) {
+            WeatherController weatherController = new WeatherController();
+            System.out.println("Welcome to the Weather App!");
             System.out.println("Options:");
             System.out.println("1. Get Weather (with weather alerts)");
             System.out.println("2. Get Forecast");
@@ -47,8 +42,6 @@ public class WeatherApp {
             }
         } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
-        } finally {
-            scanner.close();
         }
     }
 }

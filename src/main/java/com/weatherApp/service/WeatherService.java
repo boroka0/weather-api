@@ -1,19 +1,15 @@
 package com.weatherApp.service;
 
 import com.google.gson.Gson;
-import com.weatherApp.model.WeatherAlert;
-import com.weatherApp.model.WeatherAlertResponseDto;
-import com.weatherApp.model.WeatherResponse;
-import com.weatherApp.model.WeatherResponseDto;
+import com.weatherApp.model.*;
 import com.weatherApp.util.ConfigUtil;
 import com.weatherApp.util.HttpClientUtil;
+import com.weatherApp.util.TranslatorUtil;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.*;
 
 public class WeatherService {
 
@@ -42,7 +38,7 @@ public class WeatherService {
     }
 
     public List<WeatherAlert> getWeatherAlerts(double lat, double lon) throws Exception {
-        String url = String.format("%s/alerts.json?key=%s&q=%f,%f",
+        String url = String.format("%s/alerts.json?key=%s&q=%f,%f&lang=en",
                 ConfigUtil.get("weather.api.url"),
                 ConfigUtil.get("weather.api.key"),
                 lat,
@@ -56,12 +52,26 @@ public class WeatherService {
             return Collections.emptyList();
         }
 
-        return response.getAlerts().getAlert().stream()
-                .map(alertDto -> new WeatherAlert(
-                        alertDto.getEvent(),
+        Set<String> uniqueEvents = new HashSet<>();
+        List<WeatherAlert> alerts = new ArrayList<>();
+
+        for (WeatherAlertDto alertDto : response.getAlerts().getAlert()) {
+            String translatedEvent = translateAlert(alertDto.getEvent());
+
+            if (!uniqueEvents.contains(translatedEvent)) {
+                uniqueEvents.add(translatedEvent);
+                alerts.add(new WeatherAlert(
+                        translatedEvent,
                         alertDto.getStartEpoch(),
                         alertDto.getEndEpoch(),
-                        alertDto.getDescription()))
-                .collect(Collectors.toList());
+                        translateAlert(alertDto.getDescription())
+                ));
+            }
+        }
+        return alerts;
+    }
+
+    private String translateAlert(String alertText) {
+        return TranslatorUtil.translateTextToEnglish(alertText);
     }
 }

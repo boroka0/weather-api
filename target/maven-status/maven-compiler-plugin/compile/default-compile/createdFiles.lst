@@ -9,6 +9,7 @@ com\weatherApp\service\ForecastService.class
 com\weatherApp\model\AirQualityDto.class
 com\weatherApp\model\AirQualityResponse$Location.class
 com\weatherApp\model\WeatherAlertResponseDto.class
+com\weatherApp\util\TranslatorUtil.class
 com\weatherApp\model\AirQualityResponse.class
 com\weatherApp\model\WeatherAlert.class
 com\weatherApp\model\ForecastResponseDto.class
